@@ -8,5 +8,5 @@ class SecurityAuthority(
 ):GrantedAuthority {
 
     @Override
-    override fun getAuthority(): String = permission.nombre.toString();
+    override fun getAuthority(): String = permission.name.toString();
 }

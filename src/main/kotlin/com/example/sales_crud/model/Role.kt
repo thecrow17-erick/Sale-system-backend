@@ -34,7 +34,7 @@ data class Role(
         joinColumns = [JoinColumn(name = "role_id")],
         inverseJoinColumns = [JoinColumn(name = "permiso_id")]
     )
-    val permissions: MutableSet<Permission> = mutableSetOf(),
+    val permissions: MutableList<Permission> = mutableListOf(),
 
     @Column(
         nullable = false,

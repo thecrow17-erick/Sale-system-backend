@@ -14,7 +14,7 @@ class SecurityUser(
 
     @Override
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        return user.role.permissions.map { p-> SimpleGrantedAuthority(p.nombre)}.toMutableList();
+        return user.role.permissions.map { p-> SimpleGrantedAuthority(p.name)}.toMutableList();
     }
 
     @Override

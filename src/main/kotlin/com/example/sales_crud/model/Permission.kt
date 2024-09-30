@@ -24,5 +24,5 @@ data class Permission(
         name = "name",
         length = 60
     )
-    val nombre: String
+    val name: String
 );

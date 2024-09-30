@@ -7,10 +7,11 @@ import io.jsonwebtoken.io.Decoders
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.stereotype.Service
 import java.security.Key
 import java.util.*
 
-
+@Service
 class JwtService(
     @Value("11AV353CR37AUGU32121441241252142411232145efggrew34341fesdewrew")
     private val SECRET_KEY:String

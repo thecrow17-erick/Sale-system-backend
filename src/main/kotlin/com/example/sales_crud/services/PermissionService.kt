@@ -12,12 +12,22 @@ class PermissionService(
     private val permissionRepository: PermissionRepository
 ) {
     @Transactional
-    fun createPermissions(names:List<String>): List<Permission>{
-        //crea el permiso en una funcion iterativa de una lista "List.map"
-        val createPermission = names.map { name ->
-            Permission(nombre = name)
+    fun createPermissions(names: List<String>): MutableList<Permission> {
+        // Itera sobre los nombres y crea los permisos si no existen
+        val createPermission:MutableList<Permission> = names.mapNotNull { name ->
+            val findPermission = permissionRepository.findPermissionByName(name)
+            if (findPermission.isEmpty) {
+                Permission(name = name)
+            }else{
+                null
+            }
+        }.toMutableList()
+        // Si la lista tiene permisos nuevos, los guarda, si no, retorna lista vacía
+        return if (createPermission.isNotEmpty()) {
+            permissionRepository.saveAll(createPermission)
+        } else {
+            mutableListOf();
         }
-        return this.permissionRepository.saveAll(createPermission);
     }
 
 }

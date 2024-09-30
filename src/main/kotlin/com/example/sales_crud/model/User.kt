@@ -18,6 +18,7 @@ data class User(
     @Column(
         name = "username",
         length = 50,
+        unique = true,
         nullable = false
     )
     val name: String,
