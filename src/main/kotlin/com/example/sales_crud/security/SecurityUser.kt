@@ -1,12 +1,14 @@
 package com.example.sales_crud.security
 
 import com.example.sales_crud.model.User
+import lombok.AllArgsConstructor
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import java.security.SecurityPermission
 
-abstract class SecurityUser(
+@AllArgsConstructor
+class SecurityUser(
     private final val user: User
 ): UserDetails {
 
@@ -16,7 +18,7 @@ abstract class SecurityUser(
     }
 
     @Override
-    override fun getUsername(): String = user.code;
+    override fun getUsername(): String = user.name;
 
     @Override
     override fun isEnabled(): Boolean = true;

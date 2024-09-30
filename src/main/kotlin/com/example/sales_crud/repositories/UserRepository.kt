@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 import java.util.Optional
 
 interface UserRepository: JpaRepository<User, Long>{
-    fun findUserByCode(code: String): Optional<User>
+    fun findUserByName(name: String): Optional<User>
 }

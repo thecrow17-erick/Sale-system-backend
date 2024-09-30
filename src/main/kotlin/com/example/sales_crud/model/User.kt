@@ -16,35 +16,17 @@ data class User(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
     @Column(
-        name = "name",
+        name = "username",
         length = 50,
         nullable = false
     )
     val name: String,
-    @Column(
-        name = "code",
-        length = 50,
-        nullable = false
-    )
-    val code: String,
-    @Column(
-        name= "sexo",
-        length = 1,
-        nullable = false
-    )
-    val sex: String,
     @Column(
         name = "password",
         length = 255,
         nullable = false
     )
     val password: String,
-    @Column(
-        name = "telephone",
-        length = 8,
-        nullable = false
-    )
-    val telephone: String,
 
     @Column(
         nullable = false,

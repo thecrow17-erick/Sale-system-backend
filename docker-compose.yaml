@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  db:
+  db-sales-system:
     image: postgres:15
     restart: unless-stopped
     container_name: postgres_db

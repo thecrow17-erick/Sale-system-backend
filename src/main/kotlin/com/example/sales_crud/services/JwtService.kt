@@ -19,7 +19,6 @@ class JwtService(
         return getToken(HashMap(), user);
     }
     private fun getToken(extraClaims: Map<String, Any?>, user: UserDetails): String {
-        println(user)
         return Jwts
             .builder()
             .setClaims(extraClaims)
