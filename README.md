@@ -1,8 +1,8 @@
 # Sales Management System - Spring Boot (Kotlin)
 
-![Spring Boot](https://img.shields.io/badge/SpringBoot-2.7.5-brightgreen.svg)
-![Kotlin](https://img.shields.io/badge/Kotlin-1.6.21-blueviolet.svg)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14-blue.svg)
+![Spring Boot](https://img.shields.io/badge/SpringBoot-3.3.4-brightgreen.svg)
+![Kotlin](https://img.shields.io/badge/Kotlin-1.9.25-blueviolet.svg)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 A robust and scalable **Sales Management System** built with **Spring Boot** using **Kotlin**, leveraging **PostgreSQL** for data persistence, **JPA** for database interaction, and **Spring Security** for user authentication and role-based access control.

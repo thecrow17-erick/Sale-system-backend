@@ -34,4 +34,4 @@ build/
 
 
 ### DATABASE
-postgres_data
+/postgres_data
