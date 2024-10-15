@@ -15,20 +15,20 @@ import java.util.Collections
 @RestControllerAdvice
 class RestResponseEntityExceptionHandler {
 
-//    @ExceptionHandler(HttpMessageNotReadableException::class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    fun handleHttpMessageNotReadableException(ex: HttpMessageNotReadableException): ErrorMessage {
-//        val messages: List<String> = Collections.singletonList(ex.message.toString()).toList();
-//        val errorMessage = ErrorMessage(
-//            message = messages,
-//            statusCode = HttpStatus.BAD_REQUEST.value(),
-//            error = HttpStatus.BAD_REQUEST
-//        );
-//
-//        println("1: "+ errorMessage)
-//
-//        return errorMessage;
-//    }
+    @ExceptionHandler(HttpMessageNotReadableException::class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    fun handleHttpMessageNotReadableException(ex: HttpMessageNotReadableException): ErrorMessage {
+        val messages: List<String> = Collections.singletonList(ex.message.toString()).toList();
+        val errorMessage = ErrorMessage(
+            message = messages,
+            statusCode = HttpStatus.BAD_REQUEST.value(),
+            error = HttpStatus.BAD_REQUEST
+        );
+
+        println("1: "+ errorMessage)
+
+        return errorMessage;
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -47,7 +47,7 @@ class RestResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     fun handleNotFoundException(ex: NotFoundException): ErrorMessage {
         val messages = listOf(ex.message ?: "Resource not found")
-        val err=  ErrorMessage(
+        val err = ErrorMessage(
             message = messages,
             statusCode = HttpStatus.NOT_FOUND.value(),
             error = HttpStatus.NOT_FOUND

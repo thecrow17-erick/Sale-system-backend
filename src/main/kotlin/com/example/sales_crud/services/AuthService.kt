@@ -6,7 +6,6 @@ import com.example.sales_crud.error.exception.NotFoundException
 import com.example.sales_crud.error.exception.UnauthorizedException
 import com.example.sales_crud.model.User
 import com.example.sales_crud.security.SecurityUser
-import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service

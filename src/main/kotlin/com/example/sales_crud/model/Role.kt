@@ -8,8 +8,6 @@ import java.time.Instant
 
 @Entity
 @Table(name = "role", schema = "public")
-@Data
-@NoArgsConstructor
 data class Role(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
