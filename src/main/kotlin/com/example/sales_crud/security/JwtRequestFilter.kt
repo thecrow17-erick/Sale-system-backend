@@ -10,7 +10,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
-import org.springframework.security.web.context.SecurityContextHolderFilter
 import org.springframework.stereotype.Component
 import org.springframework.util.StringUtils
 import org.springframework.web.filter.OncePerRequestFilter
@@ -21,7 +20,6 @@ class JwtRequestFilter(
     private val userDetailsService: UserDetailsService,
     private val jwtService: JwtService
 ):OncePerRequestFilter() {
-    @Override
     override fun doFilterInternal(req: HttpServletRequest, res: HttpServletResponse, chain: FilterChain) {
         val token:String = this.getTokenFromRequest(req);
         if(token == ""){
@@ -29,7 +27,6 @@ class JwtRequestFilter(
             return;
         }
         val username: String = jwtService.getCodeFromToken(token);
-        println(username)
         if(username != null && SecurityContextHolder.getContext().authentication == null){
             val userDetail:UserDetails = userDetailsService.loadUserByUsername(username);
             if(jwtService.isTokenValid(token, userDetail)){
@@ -41,6 +38,7 @@ class JwtRequestFilter(
                 SecurityContextHolder.getContext().authentication = authentication;
             }
         }
+        req.setAttribute("user_id", username);
         chain.doFilter(req,res);
     }
 

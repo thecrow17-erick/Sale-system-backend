@@ -18,14 +18,12 @@ class RestResponseEntityExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleHttpMessageNotReadableException(ex: HttpMessageNotReadableException): ErrorMessage {
-        val messages: List<String> = Collections.singletonList(ex.message.toString()).toList();
+        val messages: List<String> = listOf("Ingrese contenido al cuerpo");
         val errorMessage = ErrorMessage(
             message = messages,
             statusCode = HttpStatus.BAD_REQUEST.value(),
             error = HttpStatus.BAD_REQUEST
         );
-
-        println("1: "+ errorMessage)
 
         return errorMessage;
     }
@@ -39,7 +37,6 @@ class RestResponseEntityExceptionHandler {
             message = messages,
             error = HttpStatus.BAD_REQUEST
         )
-        println(errorMessage)
         return errorMessage;
     }
 
@@ -52,7 +49,6 @@ class RestResponseEntityExceptionHandler {
             statusCode = HttpStatus.NOT_FOUND.value(),
             error = HttpStatus.NOT_FOUND
         )
-        println(err)
         return err;
     }
 
@@ -65,7 +61,6 @@ class RestResponseEntityExceptionHandler {
             error = HttpStatus.UNAUTHORIZED,
             statusCode =  HttpStatus.UNAUTHORIZED.value()
         );
-        println(errorMessage)
         return  errorMessage;
     }
 
@@ -78,7 +73,6 @@ class RestResponseEntityExceptionHandler {
             error = HttpStatus.BAD_REQUEST,
             statusCode =  HttpStatus.BAD_REQUEST.value()
         );
-        println(errorMessage);
         return errorMessage;
     }
 

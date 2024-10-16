@@ -37,7 +37,7 @@ class AuthService(
         );
     }
 
-    fun validatePassword(rawPassword: String, encodedPassword: String?): Boolean {
+    fun validatePassword(rawPassword: String, encodedPassword: String): Boolean {
         return BCryptPasswordEncoder().matches(rawPassword, encodedPassword)
     }
 

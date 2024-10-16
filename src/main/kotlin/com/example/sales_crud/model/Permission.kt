@@ -11,8 +11,6 @@ import lombok.NoArgsConstructor
 
 @Entity
 @Table(name = "permissions", schema = "public")
-@Data
-@NoArgsConstructor
 data class Permission(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
