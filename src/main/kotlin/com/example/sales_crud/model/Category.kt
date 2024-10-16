@@ -9,29 +9,29 @@ import java.time.Instant
 data class Category(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private val id: Long = 0,
+    val id: Long = 0,
     @Column(
         name = "name",
         length = 50,
         nullable = false
     )
-    private val name: String,
+    val name: String,
     @Column(
         name = "description",
         length = 255,
         nullable = false
     )
-    private val description: String,
+    val description: String,
     @Column(
         name = "status",
         nullable = false
     )
-    private val status: Boolean = true,
+    val status: Boolean = true,
     @CreationTimestamp
     @Column(
         updatable = false
     )
-    private val created_at: Instant = Instant.now(),
+    val created_at: Instant = Instant.now(),
     @CreationTimestamp
-    private val updated_at: Instant = Instant.now()
+    val updated_at: Instant = Instant.now()
 )

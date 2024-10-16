@@ -25,6 +25,7 @@ class WebSecurityConfiguration(
                 auth ->
                     auth
                         .requestMatchers(HttpMethod.GET,"/user/**").hasAnyAuthority("get orders")
+                        .requestMatchers(HttpMethod.GET, "/category/**").hasAnyAuthority("get products")
                         .requestMatchers(HttpMethod.POST,"/auth/**").permitAll()
             }
             .sessionManagement{ session ->
