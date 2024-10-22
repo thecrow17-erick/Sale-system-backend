@@ -3,8 +3,8 @@ package com.example.sales_crud.dto.auth
 import org.jetbrains.annotations.NotNull
 
 data class LoginDto(
-    @NotNull
+    @field:NotNull
     val username: String,
-    @NotNull
+    @field:NotNull
     val password: String
 );

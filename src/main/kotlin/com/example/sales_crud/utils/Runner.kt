@@ -36,7 +36,11 @@ class Runner(
             "edit permission role",
             "get permission",
             "delete role",
-            "edit detail product"
+            "edit detail product",
+            "get category",
+            "update category",
+            "create category",
+            "delete category"
         );
         val createPermission = this.permissionService.createPermissions(permissions);
         //pregunto si hay permisos nuevos para crear

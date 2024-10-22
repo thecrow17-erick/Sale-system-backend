@@ -2,6 +2,7 @@ package com.example.sales_crud.model
 
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
 import java.time.Instant
 
 @Entity
@@ -15,50 +16,51 @@ data class Product(
         nullable = false,
         length = 50
     )
-    private val name: String,
+    var name: String,
     @Column(
         name = "status",
         nullable = false
     )
-    private val status:Boolean = true,
+    var status:Boolean = true,
     @Column(
         name = "description",
         nullable = false,
         length = 255
     )
-    private val description: String,
+    var description: String,
     @Column(
         name = "price",
         nullable = false,
     )
-    private val price: Double,
+    var price: Double,
     @Column(
         name = "code",
         nullable = false,
-        length = 60
+        length = 60,
+        unique = true
     )
-    private val code: String,
+    var code: String,
     @Column(
         name = "image",
         nullable = false,
         length = 255
     )
-    private val img_url: String,
+    var img_url: String,
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
         name = "category_id",
         nullable = false,
     )
-    private val category: Category,
+    var category: Category,
     @OneToMany(
-        fetch = FetchType.LAZY,
+        cascade = [CascadeType.ALL], fetch = FetchType.LAZY
     )
-    private val details: MutableList<Product_Detail> = mutableListOf(),
+    val details: MutableList<Product_Detail> = mutableListOf(),
     @CreationTimestamp
     @Column(
         updatable = false
     )
     private val created_at: Instant = Instant.now(),
-    @CreationTimestamp
-    private val updated_at: Instant = Instant.now()
+    @UpdateTimestamp
+    var updated_at: Instant = Instant.now()
 )

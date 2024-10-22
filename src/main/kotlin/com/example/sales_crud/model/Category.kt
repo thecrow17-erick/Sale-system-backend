@@ -2,6 +2,7 @@ package com.example.sales_crud.model
 
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
 import java.time.Instant
 
 @Entity
@@ -15,23 +16,23 @@ data class Category(
         length = 50,
         nullable = false
     )
-    val name: String,
+    var name: String,
     @Column(
         name = "description",
         length = 255,
         nullable = false
     )
-    val description: String,
+    var description: String,
     @Column(
         name = "status",
         nullable = false
     )
-    val status: Boolean = true,
+    var status: Boolean = true,
     @CreationTimestamp
     @Column(
         updatable = false
     )
     val created_at: Instant = Instant.now(),
-    @CreationTimestamp
-    val updated_at: Instant = Instant.now()
+    @UpdateTimestamp
+    var updated_at: Instant = Instant.now()
 )

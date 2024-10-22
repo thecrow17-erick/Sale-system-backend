@@ -11,11 +11,12 @@ import java.util.*
 
 @Repository
 interface CategoryRepository: JpaRepository<Category, Long> {
-    fun findByName(name: String): Optional<Category>;
+    fun findCategoryById(id: Long): Optional<Category>
     fun findAllBy(pageable: Pageable): Page<Category>;
     @Query("SELECT c FROM Category c WHERE c.name ILIKE %:searchTerm% OR c.description ILIKE %:searchTerm% ")
     fun searchByNameOrDescription(
         @Param("searchTerm") searchTerm: String,
         pageable: Pageable
-    ): Page<Category>
+    ): Page<Category>;
+    fun findCategoryByName(name: String): List<Category>
 }
