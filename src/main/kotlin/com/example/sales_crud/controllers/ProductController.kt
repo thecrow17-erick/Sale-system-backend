@@ -1,8 +1,11 @@
 package com.example.sales_crud.controllers
 
+import com.example.sales_crud.dto.product.CreateProductDto
+import com.example.sales_crud.dto.product.ProductResponse
 import com.example.sales_crud.dto.response.ApiResponse
 import com.example.sales_crud.model.Product
 import com.example.sales_crud.services.ProductService
+import jakarta.validation.Valid
 import org.springframework.data.domain.Page
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -29,13 +32,13 @@ class ProductController(
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun createProduct(
-        @RequestBody file: MultipartFile,
-    ): String {
-        println("size: "+file.size)
-        println("name: "+file.name)
-        println("type: "+file.contentType)
-        println("buffer: "+file.bytes)
-        println("original name: "+file.originalFilename)
-        return file.name;
+        @Valid @RequestPart(value = "body") body: CreateProductDto,
+        @RequestPart(value = "image") image: MultipartFile
+    ): ApiResponse<ProductResponse> {
+        return ApiResponse(
+            statusCode = HttpStatus.CREATED.value(),
+            message = "Producto creado",
+            ProductResponse(this.productService.createProduct(body,image))
+        )
     }
 }

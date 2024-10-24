@@ -10,7 +10,7 @@ import java.time.Instant
 data class Product(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private val id: Long = 0,
+    val id: Long = 0,
     @Column(
         name = "name",
         nullable = false,
@@ -60,7 +60,7 @@ data class Product(
     @Column(
         updatable = false
     )
-    private val created_at: Instant = Instant.now(),
+    val created_at: Instant = Instant.now(),
     @UpdateTimestamp
     var updated_at: Instant = Instant.now()
 )

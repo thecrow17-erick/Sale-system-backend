@@ -11,11 +11,12 @@ import java.util.Optional
 
 @Repository
 interface ProductRepository: JpaRepository<Product, Long> {
-    fun findProductByCode(code: String): Optional<Product>;
+    fun findProductByCodeOrName(code: String, name: String): List<Product>
     fun findAllBy(pageable: Pageable): Page<Product>;
     @Query("SELECT p FROM Product p WHERE p.name ILIKE %:search% OR p.code ILIKE %:search%")
     fun searchByNameOrCode(
         @Param("search") search: String,
         pageable: Pageable
     ): Page<Product>;
+    fun findProductById(id: Long): Optional<Product>;
 }
