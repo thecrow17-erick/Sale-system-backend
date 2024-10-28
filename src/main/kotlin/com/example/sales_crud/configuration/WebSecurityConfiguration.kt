@@ -29,6 +29,9 @@ class WebSecurityConfiguration(
                         .requestMatchers(HttpMethod.PATCH, "/category/**").hasAnyAuthority("update category")
                         .requestMatchers(HttpMethod.DELETE, "/category/**").hasAnyAuthority("delete category")
                         .requestMatchers(HttpMethod.POST, "/product/**").hasAnyAuthority("create product")
+                        .requestMatchers(HttpMethod.GET, "/product/**").hasAnyAuthority("get products")
+                        .requestMatchers(HttpMethod.PATCH, "/product/**").hasAnyAuthority("edit product")
+                        .requestMatchers(HttpMethod.DELETE, "/product/**").hasAnyAuthority("delete product")
                         .requestMatchers(HttpMethod.POST,"/auth/**").permitAll()
             }
             .sessionManagement{ session ->

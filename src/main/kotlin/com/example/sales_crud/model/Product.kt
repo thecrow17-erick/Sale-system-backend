@@ -52,10 +52,6 @@ data class Product(
         nullable = false,
     )
     var category: Category,
-    @OneToMany(
-        cascade = [CascadeType.ALL], fetch = FetchType.LAZY
-    )
-    val details: MutableList<Product_Detail> = mutableListOf(),
     @CreationTimestamp
     @Column(
         updatable = false

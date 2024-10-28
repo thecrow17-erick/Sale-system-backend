@@ -63,10 +63,44 @@ class ProductService(
         //salvo el producto creado
         return productRepository.save(createProduct);
     }
+    fun updateProduct(id: Long,createProductDto: CreateProductDto, image: MultipartFile?): Product {
+        val findProductId = this.findProductId(id);
+        val findProduct = this.productRepository.findProductByCodeOrNameAndIdNot(
+            code = createProductDto.code,
+            name = createProductDto.name,
+            id = id
+        );
+        println(findProduct)
+        if(findProduct.size > 0)
+            throw BadRequestException("Ingrese otro codigo o nombre para el producto");
+
+        if(findProductId.category.id != createProductDto.category_id){
+            val findCategory = this.categoryService.findCategoryId(createProductDto.category_id);
+            findProductId.category = findCategory;
+        }
+
+        findProductId.name = createProductDto.name;
+        findProductId.code = createProductDto.code;
+        findProductId.price = createProductDto.price;
+        findProductId.description = createProductDto.description;
+        if(image != null && !image.isEmpty){
+            val fileContenType = image.originalFilename!!.split(".").last();
+            if(!this.isImgOrPngOrJpeg(fileContenType))
+                throw BadRequestException("Ingrese una archivo de tipo jpg,png o jpeg");
+            this.azureServices.deleteFile("sales",findProductId.img_url);
+            val nameImg = UUID.randomUUID().toString()+"."+fileContenType;
+            findProductId.img_url = nameImg;
+            this.azureServices.uploadFile("sales",nameImg,image);
+        }
+        return this.productRepository.save(findProductId) ;
+    }
     fun isImgOrPngOrJpeg(contentType: String): Boolean {
         val validations = listOf("png","jpeg","jpg");
-        if(validations.contains(contentType))
-            return true;
-        return false;
+        return validations.contains(contentType);
+    }
+    fun deleteProduct(id: Long): Product {
+        val findProductId = this.findProductId(id);
+        findProductId.status = !findProductId.status;
+        return this.productRepository.save(findProductId);
     }
 }

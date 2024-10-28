@@ -4,16 +4,39 @@ import com.example.sales_crud.error.dto.ErrorMessage
 import com.example.sales_crud.error.exception.BadRequestException
 import com.example.sales_crud.error.exception.NotFoundException
 import com.example.sales_crud.error.exception.UnauthorizedException
+import io.jsonwebtoken.ExpiredJwtException
+import io.jsonwebtoken.security.SignatureException
 import org.springframework.http.HttpStatus
 import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
-import java.util.Collections
 
 @RestControllerAdvice
 class RestResponseEntityExceptionHandler {
+
+    @ExceptionHandler(SignatureException::class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    fun handleHttpMessageSignatureException(ex: SignatureException): ErrorMessage {
+        println(ex.message)
+        return ErrorMessage(
+            statusCode = HttpStatus.UNAUTHORIZED.value(),
+            message = listOf(ex.message!!),
+            error = HttpStatus.UNAUTHORIZED
+        )
+    }
+
+    @ExceptionHandler(ExpiredJwtException::class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    fun handleHttpMessageExpiredJwtException(ex: ExpiredJwtException): ErrorMessage {
+        println(ex.message)
+        return ErrorMessage(
+            statusCode = HttpStatus.UNAUTHORIZED.value(),
+            message = listOf(ex.message!!),
+            error = HttpStatus.UNAUTHORIZED
+        )
+    }
 
     @ExceptionHandler(HttpMessageNotReadableException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

@@ -26,7 +26,6 @@ data class Order_detail(
         nullable = false,
     )
     val order: Order,
-
     @ManyToOne
     @JoinColumn(
         name = "product_detail_id",
@@ -37,5 +36,5 @@ data class Order_detail(
     @Column(
         updatable = false
     )
-    private val created_at: Instant = Instant.now(),
+    val created_at: Instant = Instant.now(),
 )

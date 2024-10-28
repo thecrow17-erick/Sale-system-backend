@@ -40,7 +40,8 @@ class Runner(
             "get category",
             "update category",
             "create category",
-            "delete category"
+            "delete category",
+            "edit product"
         );
         val createPermission = this.permissionService.createPermissions(permissions);
         //pregunto si hay permisos nuevos para crear

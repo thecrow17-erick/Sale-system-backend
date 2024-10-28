@@ -29,6 +29,19 @@ class ProductController(
             data = this.productService.findAllProduct(search,page,size)
         )
     }
+
+    @GetMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    fun findProductById(
+        @PathVariable id: Long
+    ): ApiResponse<ProductResponse> {
+        return ApiResponse(
+            statusCode = HttpStatus.OK.value(),
+            message = "Product: $id",
+            data = ProductResponse(this.productService.findProductId(id))
+        );
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun createProduct(
@@ -41,4 +54,31 @@ class ProductController(
             ProductResponse(this.productService.createProduct(body,image))
         )
     }
+
+    @PatchMapping("{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    fun updateProduct(
+        @PathVariable id: Long,
+        @Valid @RequestPart(value="body") body: CreateProductDto,
+        @RequestPart(value = "image") image: MultipartFile?
+    ): ApiResponse<ProductResponse> {
+        return ApiResponse(
+            statusCode = HttpStatus.ACCEPTED.value(),
+            message = "Producto editado",
+            data = ProductResponse(this.productService.updateProduct(id,body,image))
+        );
+    }
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    fun deleteProduct(
+        @PathVariable id: Long
+    ): ApiResponse<ProductResponse> {
+        return ApiResponse(
+            statusCode = HttpStatus.ACCEPTED.value(),
+            message = "Producto eliminado",
+            data = ProductResponse(this.productService.deleteProduct(id))
+        );
+    }
+
 }

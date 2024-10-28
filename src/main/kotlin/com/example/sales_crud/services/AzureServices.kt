@@ -22,6 +22,21 @@ class AzureServices(
             throw BadRequestException("El archivo no es valido");
         }
     }
+    // Función para eliminar un archivo (blob)
+    fun deleteFile(containerName: String, blobName: String): Unit {
+        try {
+            val containerClient: BlobContainerClient = this.getBlobContainerClient(containerName)
+            val blobClient = containerClient.getBlobClient(blobName)
+            if (blobClient.exists()) {
+                blobClient.delete()
+            } else {
+                throw BadRequestException("El archivo no existe")
+            }
+        } catch (e: Exception) {
+            println(e)
+            throw BadRequestException("Error al eliminar el archivo")
+        }
+    }
     private fun getBlobContainerClient(containerName: String): BlobContainerClient {
         return blobServiceClient.getBlobContainerClient(containerName)
     }

@@ -1,12 +1,8 @@
 package com.example.sales_crud.model
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
 import java.time.Instant
 
 @Entity
@@ -14,27 +10,34 @@ import java.time.Instant
 data class Product_Detail(
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private val id: Long = 0,
+    val id: Long = 0,
     @Column(
         name = "stock",
         nullable = false
     )
-    private val stock: Int? = 0,
+    var stock: Int = 0,
+    @Column(
+        name = "discount",
+        nullable = false
+    )
+    var discount: Double = 0.0,
     @Column(
         name = "size",
-        nullable = false
+        nullable = false,
+        length = 60
     )
-    private val size: String? = "No tiene",
-    @Column(
-        name = "color",
-        nullable = false
+    var size: String = "No tiene",
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+        name = "product_id",
+        nullable = false,
     )
-    private val color: String? = "No tiene",
+    var product: Product,
     @CreationTimestamp
     @Column(
         updatable = false
     )
-    private val created_at: Instant = Instant.now(),
-    @CreationTimestamp
-    private val updated_at: Instant = Instant.now()
+    val created_at: Instant = Instant.now(),
+    @UpdateTimestamp
+    val updated_at: Instant = Instant.now()
 )
