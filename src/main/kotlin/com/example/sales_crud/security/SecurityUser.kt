@@ -6,16 +6,18 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import java.security.SecurityPermission
+import java.util.UUID
 
 @AllArgsConstructor
 class SecurityUser(
-    private final val user: User
+    private val user: User
 ): UserDetails {
 
     @Override
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return user.role.permissions.map { p-> SimpleGrantedAuthority(p.name)}.toMutableList();
     }
+
 
     @Override
     override fun getUsername(): String = user.name;

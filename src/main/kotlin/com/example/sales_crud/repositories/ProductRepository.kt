@@ -21,4 +21,5 @@ interface ProductRepository: JpaRepository<Product, Long> {
     fun findProductById(id: Long): Optional<Product>;
     @Query("SELECT p FROM Product p WHERE (p.code = :code OR p.name = :name) AND p.id <> :id")
     fun findProductByCodeOrNameAndIdNot(@Param("code")code: String, @Param("name") name: String, @Param("id") id:Long): List<Product>;
+    fun findProductByCode(code: String): Optional<Product>;
 }

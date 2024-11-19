@@ -103,4 +103,10 @@ class ProductService(
         findProductId.status = !findProductId.status;
         return this.productRepository.save(findProductId);
     }
+    fun findProductCode(code: String): Product {
+        val findProduct = this.productRepository.findProductByCode(code);
+        if(findProduct.isEmpty)
+            throw NotFoundException("El producto no existe");
+        return findProduct.get();
+    }
 }

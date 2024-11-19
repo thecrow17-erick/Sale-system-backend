@@ -36,9 +36,9 @@ class JwtRequestFilter(
                     userDetail.authorities
                 );
                 SecurityContextHolder.getContext().authentication = authentication;
+                req.setAttribute("user_username", userDetail.username);
             }
         }
-        req.setAttribute("user_id", username);
         chain.doFilter(req,res);
     }
 

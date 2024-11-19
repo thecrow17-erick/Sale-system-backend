@@ -1,5 +1,6 @@
 package com.example.sales_crud.model
 
+import com.example.sales_crud.utils.TypePayment
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
@@ -22,6 +23,11 @@ data class Order(
         nullable = false
     )
     var total: Double,
+    @Column(
+        nullable = false
+    )
+    @Enumerated(EnumType.ORDINAL)
+    var type_payment: TypePayment,
     @OneToMany(
         mappedBy = "order",
         cascade = [CascadeType.ALL],

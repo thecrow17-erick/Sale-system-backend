@@ -22,26 +22,37 @@ class Runner(
     override fun run(vararg args: String) {
         //creo los permisos
         val permissions = mutableListOf(
-            "get orders",
-            "create orders",
-            "get products",
-            "create product",
-            "get detail product",
-            "delete orders",
-            "delete product",
-            "create detail product",
-            "add rol",
-            "edit rol",
-            "add permission role",
-            "edit permission role",
-            "get permission",
-            "delete role",
-            "edit detail product",
-            "get category",
-            "update category",
-            "create category",
-            "delete category",
-            "edit product"
+            "ver usuario",
+            "crear usuario",
+            "editar rol de usuario",
+            "reestablecer password",
+            "ver rol",
+            "crear rol",
+            "editar rol",
+            "eliminar rol",
+            "ver categoria",
+            "editar categoria",
+            "crear categoria",
+            "eliminar categoria",
+            "ver producto",
+            "crear producto",
+            "editar producto",
+            "eliminar producto",
+            "ver detalle del producto",
+            "crear detalle del producto",
+            "editar detalle del producto",
+            "ver entrada de stock",
+            "crear entrada de stock",
+            "eliminar entrada de stock",
+            "ver salida de stock",
+            "crear salida de stock",
+            "eliminar salida de stock",
+            "ver orden de venta",
+            "crear orden de venta",
+            "eliminar orden de venta",
+            "ver devolucion de venta",
+            "crear devolucion de venta",
+            "eliminar devolucion de venta",
         );
         val createPermission = this.permissionService.createPermissions(permissions);
         //pregunto si hay permisos nuevos para crear
@@ -62,7 +73,7 @@ class Runner(
                     CreateUserDto(
                         username = "admin",
                         password = "123456",
-                        role = createRol
+                        role = createRol.id
                     )
                 );
             }else{

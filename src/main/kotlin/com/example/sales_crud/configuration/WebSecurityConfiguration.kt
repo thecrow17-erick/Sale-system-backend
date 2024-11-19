@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
+import org.springframework.web.servlet.config.annotation.CorsRegistry
 
 @Configuration
 @EnableWebSecurity
@@ -20,18 +22,21 @@ class WebSecurityConfiguration(
     @Bean
     open fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http
+            .cors {  }
             .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter::class.java)
             .authorizeHttpRequests {
                 auth ->
                     auth
-                        .requestMatchers(HttpMethod.GET,"/category/**").hasAnyAuthority("get category")
-                        .requestMatchers(HttpMethod.POST, "/category/**").hasAnyAuthority("create category")
-                        .requestMatchers(HttpMethod.PATCH, "/category/**").hasAnyAuthority("update category")
-                        .requestMatchers(HttpMethod.DELETE, "/category/**").hasAnyAuthority("delete category")
-                        .requestMatchers(HttpMethod.POST, "/product/**").hasAnyAuthority("create product")
-                        .requestMatchers(HttpMethod.GET, "/product/**").hasAnyAuthority("get products")
-                        .requestMatchers(HttpMethod.PATCH, "/product/**").hasAnyAuthority("edit product")
-                        .requestMatchers(HttpMethod.DELETE, "/product/**").hasAnyAuthority("delete product")
+                        .requestMatchers(HttpMethod.GET,"/user/**").hasAnyAuthority("ver usuario")
+                        .requestMatchers(HttpMethod.POST, "/user/**").hasAnyAuthority("crear usuario")
+                        .requestMatchers(HttpMethod.GET,"/category/**").hasAnyAuthority("ver categoria")
+                        .requestMatchers(HttpMethod.POST, "/category/**").hasAnyAuthority("crear categoria")
+                        .requestMatchers(HttpMethod.PATCH, "/category/**").hasAnyAuthority("editar categoria")
+                        .requestMatchers(HttpMethod.DELETE, "/category/**").hasAnyAuthority("eliminar categoria")
+                        .requestMatchers(HttpMethod.POST, "/product/**").hasAnyAuthority("crear producto")
+                        .requestMatchers(HttpMethod.GET, "/product/**").hasAnyAuthority("ver producto")
+                        .requestMatchers(HttpMethod.PATCH, "/product/**").hasAnyAuthority("editar producto")
+                        .requestMatchers(HttpMethod.DELETE, "/product/**").hasAnyAuthority("eliminar producto")
                         .requestMatchers(HttpMethod.POST,"/auth/**").permitAll()
             }
             .sessionManagement{ session ->

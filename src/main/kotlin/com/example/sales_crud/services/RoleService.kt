@@ -2,6 +2,7 @@ package com.example.sales_crud.services
 
 import com.example.sales_crud.dto.user.CreateRoleDto
 import com.example.sales_crud.error.exception.BadRequestException
+import com.example.sales_crud.error.exception.NotFoundException
 import com.example.sales_crud.model.Permission
 import com.example.sales_crud.model.Role
 import com.example.sales_crud.repositories.RoleRepository
@@ -33,4 +34,11 @@ class RoleService(
     }
 
     fun findRole(name:String): Optional<Role> = this.roleRepository.findRoleByName(name);
+
+    fun findIdRol(id: Long): Role {
+        val findRole = this.roleRepository.findRoleById(id);
+        if (findRole.isEmpty)
+            throw NotFoundException("Rol no encontrado")
+        return findRole.get();
+    }
 }

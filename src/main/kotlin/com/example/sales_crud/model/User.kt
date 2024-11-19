@@ -4,7 +4,9 @@ import jakarta.persistence.*
 import lombok.Data
 import lombok.NoArgsConstructor
 import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.GeneratedColumn
 import java.time.Instant
+import java.util.UUID
 
 
 @Entity
@@ -13,8 +15,8 @@ import java.time.Instant
 @NoArgsConstructor
 data class User(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
+    @GeneratedValue(strategy = GenerationType.UUID)
+    val id: UUID = UUID.randomUUID(),
     @Column(
         name = "username",
         length = 50,

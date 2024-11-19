@@ -14,5 +14,5 @@ data class CreateUserDto(
     @Size(min = 5, message = "minimo de 5 caracteres para el password")
     val password: String,
     @NotNull
-    val role: Role
+    val role: Long
 );

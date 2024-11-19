@@ -14,24 +14,24 @@ data class Order_detail(
         nullable = false,
         name = "import"
     )
-    private val import: Double,
+    var import: Double,
     @Column(
         nullable = false,
-        name = "stock"
+        name = "quantity"
     )
-    val stock: Int,
+    var quantity: Int,
     @ManyToOne
     @JoinColumn(
         name = "order_id",
         nullable = false,
     )
-    val order: Order,
+    var order: Order,
     @ManyToOne
     @JoinColumn(
         name = "product_detail_id",
         nullable = false
     )
-    val productDetail: Product_Detail,
+    var productDetail: Product_Detail,
     @CreationTimestamp
     @Column(
         updatable = false

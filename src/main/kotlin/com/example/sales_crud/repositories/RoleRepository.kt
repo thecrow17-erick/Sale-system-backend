@@ -8,4 +8,5 @@ import java.util.Optional
 @Repository
 interface RoleRepository: JpaRepository<Role,Long> {
     fun findRoleByName(name: String): Optional<Role>
+    fun findRoleById(id: Long): Optional<Role>
 }

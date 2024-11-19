@@ -6,6 +6,7 @@ import com.example.sales_crud.security.SecurityUser
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
+import java.util.UUID
 
 @Service
 class SecurityUserService(
@@ -21,5 +22,14 @@ class SecurityUserService(
         throw NotFoundException(
                 "Usuario no encontrado"
         );
+    }
+
+    fun isValidUUID(uuidString: String): Boolean {
+        return try {
+            UUID.fromString(uuidString)
+            true
+        } catch (e: IllegalArgumentException) {
+            false
+        }
     }
 }
